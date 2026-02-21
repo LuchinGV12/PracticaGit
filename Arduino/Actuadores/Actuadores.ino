@@ -1,5 +1,4 @@
-//En este codigo no funciona el pulsador
-
+//Suena la alarma pero no me pide la clave
 
 import RPi.GPIO as GPIO
 import time
@@ -14,7 +13,7 @@ pulsador = 23
 GPIO.setup(ledamarillo, GPIO.OUT)
 GPIO.setup(ledrojo, GPIO.OUT)
 GPIO.setup(zumbador, GPIO.OUT)
-GPIO.setup(pulsador, GPIO.IN)   # ERROR: falta pull_up_down
+GPIO.setup(pulsador, GPIO.IN, pull_up_down=GPIO.PULL_DOWN)
 
 movimientos = 0
 
@@ -40,6 +39,10 @@ try:
                 GPIO.output(zumbador, True)
                 time.sleep(5)
                 GPIO.output(zumbador, False)
+
+                # ERROR: no pide clave
+                print("Alarma finalizada")
+
                 movimientos = 0
 
 except KeyboardInterrupt:
