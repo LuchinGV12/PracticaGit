@@ -1,4 +1,4 @@
-//Suena la alarma pero no me pide la clave
+//No valida la clave correctamente
 
 import RPi.GPIO as GPIO
 import time
@@ -13,9 +13,10 @@ pulsador = 23
 GPIO.setup(ledamarillo, GPIO.OUT)
 GPIO.setup(ledrojo, GPIO.OUT)
 GPIO.setup(zumbador, GPIO.OUT)
-GPIO.setup(pulsador, GPIO.IN, pull_up_down=GPIO.PULL_DOWN)
+GPIO.setup(pulsador, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 movimientos = 0
+clave = "1234"
 
 print("Sistema activo")
 print("Pulsa el botón para simular movimiento\n")
@@ -40,8 +41,10 @@ try:
                 time.sleep(5)
                 GPIO.output(zumbador, False)
 
-                # ERROR: no pide clave
-                print("Alarma finalizada")
+                intento = input("Introduce la clave: ")
+
+                # ERROR: acepta cualquier clave
+                print("ALARMA DESACTIVADA")
 
                 movimientos = 0
 
